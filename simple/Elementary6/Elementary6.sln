@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elementary6", "Elementary6\Elementary6.csproj", "{4684D70C-EB15-479F-96D4-77E3DF2270DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4684D70C-EB15-479F-96D4-77E3DF2270DC}.Debug|x86.ActiveCfg = Debug|x86
+		{4684D70C-EB15-479F-96D4-77E3DF2270DC}.Debug|x86.Build.0 = Debug|x86
+		{4684D70C-EB15-479F-96D4-77E3DF2270DC}.Release|x86.ActiveCfg = Release|x86
+		{4684D70C-EB15-479F-96D4-77E3DF2270DC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Elementary6\Elementary6.csproj
+	EndGlobalSection
+EndGlobal
