@@ -29,15 +29,15 @@ namespace Intermediate5
 					String line = sr.ReadToEnd();
 					char [] splitOn = new char[10];
 					splitOn[0] = ' ';
-					splitOn[1] = ',';
-					splitOn[2] = '.';
+					//splitOn[1] = ',';
+					//splitOn[2] = '.';
 					splitOn[3] = '-';
 					splitOn[4] = ';';
 					splitOn[5] = ':';
-					splitOn[6] = '!';
-					splitOn[7] = '?';
-					splitOn[8] = '\n';
-					splitOn[9] = '\t';
+					//splitOn[6] = '!';
+					//splitOn[7] = '?';
+					//splitOn[8] = '\n';
+					//splitOn[9] = '\t';
 
 					postSplit = line.Split(splitOn);
 				}
