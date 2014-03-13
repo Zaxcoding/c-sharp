@@ -13,6 +13,8 @@ namespace Intermediate5
 {
 	class MainClass
 	{
+		static Random rng = new Random();
+
 		public static void Main (string[] args)
 		{
 			Console.WriteLine ("Which txt file would you like for input?");
@@ -25,7 +27,19 @@ namespace Intermediate5
 				using (StreamReader sr = new StreamReader(fileName))
 				{
 					String line = sr.ReadToEnd();
-					postSplit = line.Split(' ');
+					char [] splitOn = new char[10];
+					splitOn[0] = ' ';
+					splitOn[1] = ',';
+					splitOn[2] = '.';
+					splitOn[3] = '-';
+					splitOn[4] = ';';
+					splitOn[5] = ':';
+					splitOn[6] = '!';
+					splitOn[7] = '?';
+					splitOn[8] = '\n';
+					splitOn[9] = '\t';
+
+					postSplit = line.Split(splitOn);
 				}
 			}
 			catch (Exception e)
@@ -37,8 +51,8 @@ namespace Intermediate5
 			Graph theGraph = new Graph ();
 
 			for (int i = 0; i < postSplit.Length - 1; i++) {
-				Node temp = new Node (postSplit [i]);
-				Node temp2 = new Node (postSplit [i + 1]);
+				String temp = postSplit [i].ToLower();
+				String temp2 = postSplit [i + 1].ToLower();
 
 				theGraph.AddNode (temp);
 				theGraph.AddNode (temp2);
@@ -46,47 +60,73 @@ namespace Intermediate5
 				theGraph.AddEdge (temp, temp2);
 			}
 		
-			theGraph.PrintAllEdges ();
+			//		theGraph.PrintAllEdges ();
+
+			theGraph.Traverse (theGraph.GetVert (rng.Next () % theGraph.NumVerts ()));
 		}
 
 
-	}
-
-	class Node 
-	{
-		String text;
-
-		public Node (String s) {
-			text = s;
-		}
 	}
 
 	class Graph 
 	{
-		List<Node> verts;
-		Dictionary<Node, Node> edges;
 
-		public Graph(List<Node> nodes) {
+		Random rng = new Random();
+
+		List<String> verts;
+		List<List<String>> edges;
+
+
+		public Graph(List<String> nodes) {
 			verts = nodes;
+			edges = new List<List<String>> ();
 		}
 
 		public Graph() {
-			verts = new List<Node> ();
-			edges = new Dictionary<Node, Node> ();
+			verts = new List<String> ();
+			edges = new List<List<String>>();
 		}
 
-		public void AddNode(Node n) {
+		public int NumVerts() {
+			return verts.Count;
+		}
+
+		public String GetVert(int i) {
+			return verts [i];
+		}
+
+		public void AddNode(String n) {
+
 			if (!verts.Contains (n)) {
 				verts.Add (n);
+				//			Console.WriteLine ("Adding {0}", n.ToString ());
+				edges.Add (new List<String> ());
 			}
 		}
 
-		public void AddEdge(Node f, Node t) {
-			edges.Add (f, t);
+		public void AddEdge(String nodeFrom, String nodeTo) {
+			//			Console.WriteLine ("Index of from: {0}, index of to: {1}", verts.IndexOf (nodeFrom), verts.IndexOf (nodeTo));
+			edges [verts.IndexOf(nodeFrom)].Add (nodeTo);
 		}
 
 		public void PrintAllEdges() {
-			Console.WriteLine(edges.Values.ToString ());
+			for (int i = 0; i < edges.Count; i++) {
+				Console.Write ("Start node: {0} --> ", verts [i]);
+				for (int j = 0; j < edges [i].Count; j++) {
+					Console.Write (" {0},", edges [i] [j]);
+				}
+				Console.WriteLine ();
+			}
+		}
+
+		public void Traverse(String n) {
+			Console.Write (" {0}", n);
+			if (edges [verts.IndexOf (n)].Count == 1) {
+				Traverse (verts [rng.Next () % verts.Count]);
+			} else {
+				int temp = rng.Next () % edges [verts.IndexOf (n)].Count;
+				Traverse (edges [verts.IndexOf (n)] [temp]);
+			}
 		}
 
 	}
